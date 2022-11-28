@@ -1,6 +1,7 @@
 from challenges.challenge_encrypt_message import encrypt_message
 import pytest
 
+
 def test_encrypt_message():
     message = encrypt_message("AABBCC", 3)
     assert "BAA_CCB" == message
