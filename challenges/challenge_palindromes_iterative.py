@@ -1,3 +1,5 @@
-def is_palindrome_iterative(word):
-    """Faça o código aqui."""
-    raise NotImplementedError
+# def is_palindrome_iterative(word):
+#     n = len(word)
+#     initial = 0
+#     while n >= 0:
+#         pass
