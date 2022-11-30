@@ -1,25 +1,31 @@
-def sorted_word(word):
-    n = len(word)
+def sorted_word(word, start, end):
+    if start < end:
+        p = partition(word, start, end) 
+        sorted_word(word, start, p - 1)
+        sorted_word(word, p + 1, end)
 
-    for index in range(n - 1):
-        min_element_index = index
+def partition(word, start, end):
+    pivot = word[end]
+    delimiter = start - 1
 
-        for search_index in range(index + 1, n):
-            if word[search_index] < word[min_element_index]:
-                min_element_index = search_index
+    for index in range(start, end):
+        if word[index] <= pivot:
+            delimiter = delimiter + 1
+            word[index], word[delimiter] = word[delimiter], word[index]
 
-        current_element = word[index]
-        word[index] = word[min_element_index]
-        word[min_element_index] = current_element
+    word[delimiter + 1], word[end] = word[end], word[delimiter + 1]
 
-    return word
-
+    return delimiter + 1
 
 def is_anagram(first_string, second_string):
-    first_formated = sorted_word(first_string.lower())
-    second_formated = sorted_word(second_string.lower())
+    first_formated = list(first_string.lower())
+    second_formated = list(second_string.lower())
+    sorted_word(first_formated, 0, (len(first_formated) - 1))
+    sorted_word(second_formated, 0, (len(second_formated) - 1))
+    first_formated = ','.join(first_formated).replace(',','')
+    second_formated = ','.join(second_formated).replace(',','')
 
-    if len(first_string) != len(second_string):
+    if first_formated != second_formated or first_string == '' or second_formated == '':
         return (first_formated, second_formated, False)
     else:
         return (first_formated, second_formated, True)
