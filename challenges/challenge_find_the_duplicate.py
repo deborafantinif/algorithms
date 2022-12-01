@@ -4,10 +4,4 @@ def find_duplicate(nums):
     for number in nums:
         if number < 0:
             return False
-        for next_number in range(nums.index(number) + 1, len(nums)):
-            if number == nums[next_number]:
-                return True
     return False
-
-
-print(find_duplicate([1,2]))
